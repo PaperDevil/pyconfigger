@@ -15,6 +15,12 @@ class DefaultConfigField:
             self._value = value
         return self._value
 
+    def __repr__(self):
+        return f"(default) {self.name}: {self.value}"
+
+    def __str__(self):
+        return f"(default) {self.name}: {self.value}"
+
 
 class ImmutableConfigField(DefaultConfigField):
     """Immutable config field"""
@@ -22,7 +28,10 @@ class ImmutableConfigField(DefaultConfigField):
         super(ImmutableConfigField, self).__init__(name, value)
 
     @property
-    def value(self):
+    def value(self, value):
+        if self._value is None:
+            self._value = value
+            return value
         return self._value
 
 

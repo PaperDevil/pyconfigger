@@ -7,9 +7,9 @@ TODO:
 """
 
 from pprint import pprint
-from src.single_config import SingleConfig
+from src.basic_config import BasicConfig
 
 
-config = SingleConfig('debug.yml')
-
-pprint(config)
+config = BasicConfig('debug.yml', show_config=False)
+port = config('port').value
+print(port)

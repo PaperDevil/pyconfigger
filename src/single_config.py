@@ -7,7 +7,7 @@ TODO:
 
 from pathlib import Path
 from threading import Lock, Thread
-from .file_worker import such_a_type, use_list, config_to_string
+from .file_workers import such_a_type, use_list, config_to_string
 
 
 class SingleConfigMeta(type):
