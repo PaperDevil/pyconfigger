@@ -6,10 +6,12 @@ TODO:
     - Оформление Python пакета для PyPi
 """
 
-from pprint import pprint
-from src.basic_config import BasicConfig
+from field.fields import DefaultConfigField
+from config.single_config import SingleConfig
 
 
-config = BasicConfig('debug.yml', show_config=False)
-port = config('port').value
-print(port)
+config = SingleConfig('debug.yml')  # Creation
+config['hash'] = DefaultConfigField('color', 'ORANGE')
+config = SingleConfig('debug.yml')  # Getting
+
+print(config)

@@ -1,16 +1,10 @@
-"""
-TODO:
-    - Реализовать все функции SingleConfig
-        - Наследовать SingleConfig от BasicConfig
-    - Функция обновления конфига (замены файла)
-"""
-
 from pathlib import Path
-from .file_workers import such_a_type, use_list, config_to_string
-from .fields import DefaultConfigField
+
+from file_worker import such_a_type, use_list, config_to_string
+from field import DefaultConfigField
 
 
-def showing_config(decorate):
+def showing_config(decorate):  # todo To Utils
     def wrapper(cls, *args, **kwargs):
         decorate(cls, *args, **kwargs)
         if cls.show_config:
@@ -24,19 +18,21 @@ class BasicConfig:
     Can have multiple instances.
     """
 
-    name: str = ...
+    name: str = None
+    file: str = None
 
     config_data: dict = None
     config_type: str = None
 
     _show_config = False  # Shows config with creation/updating
-    _show_uses_modules = False  # Show modules using BasicConfig
+    _show_uses_modules = False  # Show modules using BasicConfig todo
 
-    def __init__(self, config_name: str, show_config: bool = False,
+    def __init__(self, filename: str, show_config: bool = False,
                  show_uses_modules: bool = False):
         self.show_config = show_config
         self.show_uses_modules = show_uses_modules
-        self.set_config(config_name)
+
+        self.set_config(filename)
 
     @showing_config
     def set_config(self, filename: str, config_name: str = None):
@@ -45,6 +41,7 @@ class BasicConfig:
         if config_name is None:
             self.name = Path(filename).stem
         else: self.name = config_name
+        self.file = filename
 
         _config_type = such_a_type(filename)
         self.config_type = _config_type
@@ -63,7 +60,10 @@ class BasicConfig:
         return self.config_data[field]
 
     def __repr__(self):
-        return f"SingeConfig - {self.name}\n\n{config_to_string(self)}"
+        return f"BasicConfig - file: {self.file} name: {self.name}\n" \
+               f"===== Config Fields =====\n" \
+               f"{config_to_string(self)}" \
+               f"========================="
 
     def __getitem__(self, item: str):
         return self.config_data[item].value

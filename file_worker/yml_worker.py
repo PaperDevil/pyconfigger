@@ -1,10 +1,6 @@
-"""
-TODO:
-    - Редактировать функцию yml_config_to_string для красивого вывода
-"""
-
 import yaml
-from ..fields import DefaultConfigField
+
+from field import DefaultConfigField
 from .works import worker
 
 
@@ -21,6 +17,7 @@ def set_yml_config(file):
 
 
 def yml_config_to_string(config):
+    # TODO: Сделать последовательный вывод для списков и словарей
     stringed_config = ""
     for field in config.config_data:
         stringed_config += f"{config.config_data[field]}\n"
