@@ -1,6 +1,7 @@
 """
 Classes of config fields, description of standard models of config fields.
 """
+import pprint
 
 
 class DefaultConfigField:
@@ -19,7 +20,7 @@ class DefaultConfigField:
         return f"(default) {self.name}: {self.value}"
 
     def __str__(self):
-        return f"(default) {self.name}: {self.value}"
+            return f"(default) {self.name}: {self.value}"
 
 
 class ImmutableConfigField(DefaultConfigField):

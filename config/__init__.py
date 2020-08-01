@@ -1,2 +1,0 @@
-from config.basic_config import BasicConfig
-from config.single_config import SingleConfig

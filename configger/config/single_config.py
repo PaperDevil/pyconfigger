@@ -1,14 +1,10 @@
-from pathlib import Path
-from threading import Lock, Thread
+from threading import Lock
 
-from file_worker import such_a_type, use_list, config_to_string
-from config.basic_config import BasicConfig
+from configger.file_worker import config_to_string
+from configger.config.basic_config import BasicConfig
 
 
 class SingleConfigMeta(type):
-    """
-    Metaclass for realize multithreading singleton pattern
-    """
 
     _instances = {}
 
@@ -25,4 +21,7 @@ class SingleConfigMeta(type):
 class SingleConfig(BasicConfig, metaclass=SingleConfigMeta):
 
     def __repr__(self):
-        return f"SingeConfig - {self.name}\n\n{config_to_string(self)}"
+        return f"SingleConfig - file: {self.file} name: {self.name}\n" \
+               f"===== Config Fields =====\n" \
+               f"{config_to_string(self)}" \
+               f"========================="

@@ -1,7 +1,7 @@
 from pathlib import Path
 
-from file_worker import such_a_type, use_list, config_to_string
-from field import DefaultConfigField
+from configger.file_worker import such_a_type, use_list, config_to_string
+from configger.field import DefaultConfigField
 
 
 def showing_config(decorate):  # todo To Utils
@@ -27,11 +27,12 @@ class BasicConfig:
     _show_config = False  # Shows config with creation/updating
     _show_uses_modules = False  # Show modules using BasicConfig todo
 
-    def __init__(self, filename: str, show_config: bool = False,
+    def __init__(self, filename: str = None, show_config: bool = False,
                  show_uses_modules: bool = False):
         self.show_config = show_config
         self.show_uses_modules = show_uses_modules
 
+        if not filename: return
         self.set_config(filename)
 
     @showing_config
@@ -44,6 +45,8 @@ class BasicConfig:
         self.file = filename
 
         _config_type = such_a_type(filename)
+        if _config_type is None:
+            raise Exception("Config file not found or not supported!")
         self.config_type = _config_type
         use_list[_config_type](self, filename)  # Filling in the config
 
@@ -69,4 +72,4 @@ class BasicConfig:
         return self.config_data[item].value
 
     def __setitem__(self, key: str, value: DefaultConfigField):
-        self.config_data[key] = value
+        self.config_data[key] = DefaultConfigField(key, value)

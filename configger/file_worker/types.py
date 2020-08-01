@@ -1,5 +1,5 @@
-from .json_worker import set_json_config, json_config_to_string
-from .yml_worker import set_yml_config, yml_config_to_string
+from configger.file_worker.json_worker import set_json_config, json_config_to_string
+from configger.file_worker.yml_worker import set_yml_config, yml_config_to_string
 
 
 def such_a_type(filename: str):

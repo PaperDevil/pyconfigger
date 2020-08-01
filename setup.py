@@ -1,17 +1,10 @@
-"""
-TODO:
-    - Консольная работа с конфигами (CLI для работы с конфигами)
-    - Работа со сторонними сервисами конфигурации
-    - Добавление секретных полей в конфиг
-    - Оформление Python пакета для PyPi
-"""
-
-from field.fields import DefaultConfigField
-from config.single_config import SingleConfig
+from setuptools import setup, find_packages
+from os.path import join, dirname
 
 
-config = SingleConfig('debug.yml')  # Creation
-config['hash'] = DefaultConfigField('color', 'ORANGE')
-config = SingleConfig('debug.yml')  # Getting
-
-print(config)
+setup(
+    name='py-configger',
+    version='a0.1.0',
+    packages=find_packages(),
+    long_description=open(join(dirname(__file__), 'README.md')).read(),
+)
