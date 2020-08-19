@@ -1,0 +1,1 @@
+from configger.config import BasicConfig, SingleConfig
