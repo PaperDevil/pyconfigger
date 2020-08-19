@@ -10,5 +10,6 @@ setup(
     packages=find_packages(),
     long_description=open(join(dirname(__file__), 'README.md')).read(),
     author="@PaperDevil",
-    author_email="ketov-x@yandex.ru"
+    author_email="ketov-x@yandex.ru",
+    download_url='https://github.com/PaperDevil/pyconfigger/blob/master/dist/py-configger-0.1.2a0.tar.gz'
 )
