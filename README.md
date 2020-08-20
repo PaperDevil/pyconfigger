@@ -10,7 +10,7 @@ The main tools provided by the package are the BasicConfig and SingleConfig clas
 #### BasicConfig
 Standard config implementation. Its peculiarity is the ability to be defined only in one place, and then be passed to factories as an argument or imported by other modules.
 ```.python
-from configger.config import BasicConfig
+from configger import BasicConfig
 
 basic_config = BasicConfig("config.yml")
 
@@ -23,7 +23,7 @@ Config type implementing the Singleton pattern. You can get the same version of 
 
 **main.py**
 ```.python
-from configger.config import SingleConfig
+from configger import SingleConfig
 from second import do_stuff
 
 
