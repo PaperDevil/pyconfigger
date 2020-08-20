@@ -71,5 +71,5 @@ class BasicConfig:
     def __getitem__(self, item: str):
         return self.config_data[item].value
 
-    def __setitem__(self, key: str, value: DefaultConfigField):
+    def __setitem__(self, key: str, value: any):
         self.config_data[key] = DefaultConfigField(key, value)
