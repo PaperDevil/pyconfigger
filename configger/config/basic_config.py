@@ -1,4 +1,5 @@
 from pathlib import Path
+from functools import lru_cache
 
 from configger.file_worker import such_a_type, use_list, config_to_string
 from configger.field import DefaultConfigField
@@ -59,6 +60,7 @@ class BasicConfig:
     def show_config(self, value: bool):
         self._show_config = value
 
+    @lru_cache(typed=True)
     def __call__(self, field: str, algorithm: str = None):
         return self.config_data[field]
 
