@@ -138,3 +138,19 @@ def test_add_list_to_basic_config_json(basic_config_json):
     basic_config_json['new-list'] = ['Bob', 'Ann', 'Joe']
     assert type(basic_config_json['new-list']) == list
     assert basic_config_json['new-list'] == ['Bob', 'Ann', 'Joe']
+
+
+def test_get_config_value_from_env(single_config_yml, basic_config_yml):
+    single_config_yml.use_environ = True
+    basic_config_yml.use_environ = True
+    assert single_config_yml['TEST_VALUE'] == 'TEST_VALUE'
+    assert basic_config_yml['TEST_VALUE'] == 'TEST_VALUE'
+
+
+def test_override_config_value_from_env(single_config_yml, basic_config_yml):
+    single_config_yml.use_environ = True
+    basic_config_yml.use_environ = True
+    single_config_yml['TEST_VALUE'] = None
+    basic_config_yml['TEST_VALUE'] = None
+    assert single_config_yml['TEST_VALUE'] == 'TEST_VALUE'
+    assert basic_config_yml['TEST_VALUE'] == 'TEST_VALUE'
