@@ -1,4 +1,6 @@
+from os import getenv
 from pathlib import Path
+from functools import lru_cache
 
 from configger.file_worker import such_a_type, use_list, config_to_string
 from configger.field import DefaultConfigField
@@ -27,10 +29,15 @@ class BasicConfig:
     _show_config = False  # Shows config with creation/updating
     _show_uses_modules = False  # Show modules using BasicConfig todo
 
-    def __init__(self, filename: str = None, show_config: bool = False,
-                 show_uses_modules: bool = False):
+    def __init__(self,
+                 filename: str = None,
+                 show_config: bool = False,
+                 show_uses_modules: bool = False,
+                 use_environ: bool = False):
+
         self.show_config = show_config
         self.show_uses_modules = show_uses_modules
+        self.use_environ = use_environ
 
         if not filename: return
         self.set_config(filename)
@@ -59,6 +66,7 @@ class BasicConfig:
     def show_config(self, value: bool):
         self._show_config = value
 
+    @lru_cache(typed=True)
     def __call__(self, field: str, algorithm: str = None):
         return self.config_data[field]
 
@@ -69,7 +77,12 @@ class BasicConfig:
                f"========================="
 
     def __getitem__(self, item: str):
-        return self.config_data[item].value
+        result = None
+        if self.use_environ:
+            result = getenv(str(item), None)
+        if item in self.config_data and result is None:
+            result = self.config_data[item].value
+        return result
 
-    def __setitem__(self, key: str, value: DefaultConfigField):
+    def __setitem__(self, key: str, value: any):
         self.config_data[key] = DefaultConfigField(key, value)

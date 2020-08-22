@@ -1,2 +1,3 @@
 my-name: 'Bob'
 my-age: 18
+my-list: ['apple', 'orange', 'banana']
