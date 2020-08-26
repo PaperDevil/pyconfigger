@@ -13,6 +13,7 @@ configger/file_worker/json_worker.py
 configger/file_worker/types.py
 configger/file_worker/works.py
 configger/file_worker/yml_worker.py
+configger/generator/__init__.py
 py_configger.egg-info/PKG-INFO
 py_configger.egg-info/SOURCES.txt
 py_configger.egg-info/dependency_links.txt
