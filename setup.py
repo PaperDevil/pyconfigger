@@ -11,5 +11,5 @@ setup(
     description="Simple package for easy configuration of your projects.",
     author="@PaperDevil",
     author_email="ketov-x@yandex.ru",
-    download_url='https://github.com/PaperDevil/pyconfigger/blob/master/dist/py-configger-0.1.3a0.tar.gz'
+    download_url='https://github.com/PaperDevil/pyconfigger/blob/master/dist/py-configger-0.1.4a0.tar.gz'
 )
