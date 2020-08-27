@@ -1,3 +1,5 @@
+import os
+
 from configger.field import DefaultConfigField
 from configger.file_worker.works import worker
 
@@ -26,5 +28,5 @@ def set_yml_config(file):
 def yml_config_to_string(config):
     stringed_config = ""
     for field in config.config_data:
-        stringed_config += f"{config.config_data[field]}\n"
+        stringed_config += os.getenv(config.config_data[field].name, f"{config.config_data[field]}\n")
     return stringed_config

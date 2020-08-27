@@ -1,3 +1,4 @@
+import os
 import json
 
 from configger.field import DefaultConfigField
@@ -19,5 +20,5 @@ def set_json_config(file):
 def json_config_to_string(config):
     stringed_config = ""
     for field in config.config_data:
-        stringed_config += f"{config.config_data[field]}\n"
+        stringed_config += os.getenv(config.config_data[field].name, f"{config.config_data[field]}\n")
     return stringed_config
